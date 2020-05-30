@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="VcsDirectoryMappings">
-    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Amazon_vitamin/tests" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Repricing" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/account_assistant" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/c-website/Sites/revalTest/CodeDynamicWebsites" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/c-website/review_web" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ecom_monitor" vcs="Git" />
   </component>
 </project>
