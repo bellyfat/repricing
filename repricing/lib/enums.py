@@ -26,24 +26,25 @@ class ItemCondition(Enum):
 
 
 class Country(Enum):
-    US = ('USD', 'com', 'ATVPDKIKX0DER', True)
-    CA = ('CND', 'ca', 'A2EUQ1WTGCTBG2', False)
-    MX = ('MXD', 'com.mx', 'A1AM78C64UM0Y8', False)
-    UK = ('GBP', 'co.uk', 'A1F83G8C2ARO7P', True)
-    FR = ('EUR', 'fr', 'A13V1IB3VIYZZH', False)
-    DE = ('EUR', 'de', 'A1PA6795UKMFR9', False)
-    IT = ('EUR', 'it', 'APJ6JRA9NG5V4', False)
-    ES = ('EUR', 'es', 'A1RKKUPIHCS9HS', False)
-    JP = ('JPY', 'co.jp', 'A1VC38T7YXB528', False)
-    AU = ('AUD', 'com.au', 'A39IBJ37TRP1C6', False)
-    CN = ('CNY', 'cn', 'AAHKV2X7AFYLW', False)
-    IN = ('INR', 'in', 'A21TJRUUN4KGV', False)
+    US = ('USD', 'com', 'ATVPDKIKX0DER', True, 'NA')
+    CA = ('CND', 'ca', 'A2EUQ1WTGCTBG2', False, 'NA')
+    MX = ('MXD', 'com.mx', 'A1AM78C64UM0Y8', False, 'NA')
+    UK = ('GBP', 'co.uk', 'A1F83G8C2ARO7P', True, 'EU')
+    FR = ('EUR', 'fr', 'A13V1IB3VIYZZH', False, 'EU')
+    DE = ('EUR', 'de', 'A1PA6795UKMFR9', False, 'EU')
+    IT = ('EUR', 'it', 'APJ6JRA9NG5V4', False, 'EU')
+    ES = ('EUR', 'es', 'A1RKKUPIHCS9HS', False, 'EU')
+    JP = ('JPY', 'co.jp', 'A1VC38T7YXB528', False, 'AP')
+    AU = ('AUD', 'com.au', 'A39IBJ37TRP1C6', False, 'AP')
+    CN = ('CNY', 'cn', 'AAHKV2X7AFYLW', False, 'AP')
+    IN = ('INR', 'in', 'A21TJRUUN4KGV', False, 'IN')
 
-    def __init__(self, currency_code, url_postfix, marketplace_id, is_forwarding_source):
+    def __init__(self, currency_code, url_postfix, marketplace_id, is_forwarding_source, region):
         self.currency_code = currency_code
         self.url_postfix = url_postfix
         self.marketplace_id = marketplace_id
         self.is_forwarding_source = is_forwarding_source
+        self.region = region
 
     @staticmethod
     def from_code(country_code):
@@ -53,26 +54,34 @@ class Country(Enum):
 
         return None
 
-    def base_url(self):
-        return 'https://www.amazon.%s' % self.url_postfix
-
     @property
     def code(self):
         return self.name
 
-    @property
-    def eu_countries(self):
-        return [self.UK, self.DE, self.FR, self.ES, self.IT]
+    @staticmethod
+    def eu_countries():
+        return [country for country in Country if country.region == 'EU']
 
     def is_eu_country(self):
-        return self in self.eu_countries
+        return self.region == 'EU'
+
+    @staticmethod
+    def na_countries():
+        return [country for country in Country if country.region == 'NA']
+
+    def is_na_country(self):
+        return self.region == 'NA'
+
+    @staticmethod
+    def ap_countries():
+        return [country for country in Country if country.region == 'AP']
+
+    def is_ap_country(self):
+        return self.region == 'AP'
 
     @staticmethod
     def forwarding_sources():
         return [country for country in Country if country.is_forwarding_source]
 
-
-if __name__ == '__main__':
-    print(Country.UK.is_eu_country())
-    print(Country.US.is_eu_country())
-    print(Country.from_code('uk'))
+    def base_url(self):
+        return 'https://www.amazon.%s' % self.url_postfix
