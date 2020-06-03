@@ -1,0 +1,23 @@
+python-crontab
+xmltodict
+python-dateutil
+gspread
+future
+six
+click
+requests>=2.17.1
+google-api-python-client
+google-auth-httplib2
+google-auth-oauthlib
+oauth2client
+google-cloud-storage
+dropbox
+Peewee >= 3.4.0
+PyMySql
+bs4
+gmail-api-wrapper>=0.1
+mws-wrapper
+cmutils
+amazon_spider
+python-telegram-bot
+emoji
